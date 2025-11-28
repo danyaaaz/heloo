@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Гарик - пудель с характером</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #8a6dcc;
+            --secondary: #ff9a3c;
+            --accent: #ff5252;
+            --light: #f8f5ff;
+            --dark: #4a3a6b;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--light) 0%, #e6e0ff 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            animation: slideDown 0.8s ease-out;
+        }
+        
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            font-size: 2rem;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav li {
+            margin-left: 30px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: var(--secondary);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--secondary);
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .hero {
+            padding: 150px 0 80px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            color: var(--dark);
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 154, 60, 0.3);
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 154, 60, 0.4);
+        }
+        
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--primary);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: var(--secondary);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            padding-right: 30px;
+            animation: fadeInLeft 1s ease-out;
+        }
+        
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+            animation: fadeInRight 1s ease-out;
+        }
+        
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .dog-image {
+            width: 100%;
+            max-width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+            background: linear-gradient(135deg, #e0d6ff 0%, #c9bbff 100%);
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+        
+        .dog-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark);
+            font-size: 1.2rem;
+        }
+        
+        .dog-placeholder i {
+            font-size: 5rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .features {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature {
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: 10px;
+            transition: all 0.3s;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .feature:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature i {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .feature h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .dual-nature {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            margin-top: 40px;
+        }
+        
+        .nature-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+        
+        .nature-item {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+            padding: 30px;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+        
+        .nature-item:hover {
+            transform: scale(1.03);
+        }
+        
+        .angry {
+            background: linear-gradient(135deg, #ffe6e6 0%, #ffcccc 100%);
+            border-left: 5px solid var(--accent);
+        }
+        
+        .cute {
+            background: linear-gradient(135deg, #e6fffa 0%, #ccfff0 100%);
+            border-left: 5px solid var(--primary);
+        }
+        
+        .nature-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+        
+        .angry .nature-icon {
+            color: var(--accent);
+            animation: shake 0.5s infinite alternate;
+        }
+        
+        .cute .nature-icon {
+            color: var(--primary);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes shake {
+            from {
+                transform: rotate(-5deg);
+            }
+            to {
+                transform: rotate(5deg);
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+        
+        .contact-info {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .contact-item {
+            margin-bottom: 25px;
+            padding: 20px;
+            border-radius: 10px;
+            background: #f9f9f9;
+            transition: all 0.3s;
+        }
+        
+        .contact-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .contact-item h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .contact-item p {
+            font-size: 1.2rem;
+            color: #333;
+        }
+        
+        .phone {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+        
+        .telegram {
+            color: #0088cc;
+            font-weight: 600;
+        }
+        
+        footer {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+        
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .footer-note {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                justify-content: center;
+            }
+            
+            nav li {
+                margin: 0 15px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .about-text {
+                padding-right: 0;
+                margin-bottom: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-paw"></i>
+                    Гарик<span>.</span>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#about">О Гарике</a></li>
+                        <li><a href="#nature">Две стороны</a></li>
+                        <li><a href="#contact">Контакты</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Гарик - пудель с характером</h1>
+            <p>Знакомьтесь с Гариком - очаровательным пуделем, который превращается в рычащего защитника своей еды, но становится самым милым созданием, когда ее просит.</p>
+            <a href="#nature" class="btn">Узнать о двух сторонах Гарика</a>
+        </div>
+    </section>
+
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">О Гарике</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Гарик - это не просто пудель, это настоящая личность с характером. Он появился у нас 2 года назад и с тех пор удивляет нас своей двойственной натурой.</p>
+                    <p>В обычное время Гарик - милый, игривый и очень умный пудель. Он обожает прогулки, игры с мячом и внимание хозяев. Но когда дело касается еды...</p>
+                    <p>Гарик превращается в настоящего защитника своей миски! Он может рычать и показывать характер, если кто-то попытается отобрать его еду. Но когда он сам хочет угощения, то использует все свое обаяние.</p>
+                </div>
+                <div class="about-image">
+                    <div class="dog-image">
+                        <div class="dog-placeholder">
+                            <i class="fas fa-dog"></i>
+                            <p>Фото Гарика (gary.jpg)</p>
+                            <small>Поместите изображение в папку с сайтом</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="nature" class="section">
+        <div class="container">
+            <h2 class="section-title">Две стороны Гарика</h2>
+            <div class="dual-nature">
+                <div class="nature-container">
+                    <div class="nature-item angry">
+                        <div class="nature-icon">
+                            <i class="fas fa-angry"></i>
+                        </div>
+                        <h3>Гарик-Защитник</h3>
+                        <p>Когда дело касается его еды, Гарик превращается в бесстрашного защитника. Он может рычать, скалить зубы и вообще вести себя как настоящий хищник, если почувствует угрозу своей миске.</p>
+                        <p>Лучше не трогать Гарика, когда он ест - это его территория и его правила!</p>
+                    </div>
+                    <div class="nature-item cute">
+                        <div class="nature-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3>Гарик-Обольститель</h3>
+                        <p>Когда Гарик сам хочет получить вкусняшку, он использует все свое обаяние. Грустные глаза, лапка на колене, нежное поскуливание - он знает, как растрогать сердце хозяина.</p>
+                        <p>Устоять перед таким милым пуделем практически невозможно!</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="features">
+                <div class="features-grid">
+                    <div class="feature">
+                        <i class="fas fa-brain"></i>
+                        <h3>Умный</h3>
+                        <p>Гарик быстро учится и понимает более 15 команд. Знает, как добиться своего.</p>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-theater-masks"></i>
+                        <h3>Актер</h3>
+                        <p>Мастерски перевоплощается из милого пуделя в грозного защитника еды.</p>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-cookie-bite"></i>
+                        <h3>Гурман</h3>
+                        <p>Обожает вкусняшки и знает, как их заполучить. Особенно любит сыр и яблоки.</p>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Защитник</h3>
+                        <p>Всегда на страже своей миски. Никто не посмеет посягнуть на его еду!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title">Контакты и поддержка</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <h3>Телефон для связи</h3>
+                    <p class="phone">+7 (965) 628-22-16</p>
+                </div>
+                <div class="contact-item">
+                    <h3>Telegram поддержка</h3>
+                    <p class="telegram">@garypesik</p>
+                </div>
+                <div class="contact-item">
+                    <h3>Банковская карта</h3>
+                    <p>Номер карты будет добавлен позже</p>
+                </div>
+                <div class="contact-item">
+                    <h3>Совет от Гарика</h3>
+                    <p>Не пытайтесь отобрать у меня еду - лучше предложите что-то вкусненькое!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>Сайт посвящен пуделю Гарику с характером</p>
+                <p class="footer-note">Помните: у каждого пса есть свои особенности характера, и это делает их уникальными!</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Плавная прокрутка к якорям
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Анимация появления элементов при скролле
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Наблюдаем за элементами, которые должны появляться при скролле
+        document.querySelectorAll('.feature, .contact-item, .nature-item').forEach(el => {
+            el.style.opacity = 0;
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+        
+        // Замена placeholder'а на реальное изображение
+        // Этот код уже раскомментирован и будет работать
+        window.addEventListener('load', function() {
+            const dogImage = document.querySelector('.dog-image');
+            dogImage.innerHTML = '<img src="gary.jpg" alt="Гарик - пудель с характером" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">';
+        });
+    </script>
+</body>
+</html>
